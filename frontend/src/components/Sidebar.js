@@ -15,7 +15,7 @@ const Sidebar = () => {
         <span className="text-2xl">💸</span>
         <div>
           <h1 className="text-lg font-semibold">Finance Tracker</h1>
-          <p className="text-xs text-slate-400">Simple MERN budget app</p>
+          
         </div>
       </div>
 
