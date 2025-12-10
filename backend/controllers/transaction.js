@@ -5,7 +5,8 @@ const Transaction = require('../models/transaction');
 exports.getTransactions = async (req, res) => {
   try {
     const { month, year, type, category } = req.query;
-    let query = { user: req.user._id };
+    // No authentication: start with all transactions
+    let query = {};
 
     // Filter by type
     if (type) {
@@ -59,7 +60,6 @@ exports.createTransaction = async (req, res) => {
     const { amount, type, category, description, date } = req.body;
 
     const transaction = await Transaction.create({
-      user: req.user._id,
       amount,
       type,
       category,
@@ -77,10 +77,7 @@ exports.createTransaction = async (req, res) => {
 //PUT /api/transactions/:id
 exports.updateTransaction = async (req, res) => {
   try {
-    const transaction = await Transaction.findOne({
-      _id: req.params.id,
-      user: req.user._id
-    });
+    const transaction = await Transaction.findById(req.params.id);
 
     if (!transaction) {
       return res.status(404).json({ message: 'Transaction not found' });
@@ -101,10 +98,7 @@ exports.updateTransaction = async (req, res) => {
 //DELETE /api/transactions/:id
 exports.deleteTransaction = async (req, res) => {
   try {
-    const transaction = await Transaction.findOneAndDelete({
-      _id: req.params.id,
-      user: req.user._id
-    });
+    const transaction = await Transaction.findByIdAndDelete(req.params.id);
 
     if (!transaction) {
       return res.status(404).json({ message: 'Transaction not found' });
@@ -126,7 +120,6 @@ exports.getMonthlySummary = async (req, res) => {
     const monthlyData = await Transaction.aggregate([
       {
         $match: {
-          user: req.user._id,
           date: {
             $gte: new Date(`${currentYear}-01-01`),
             $lte: new Date(`${currentYear}-12-31`)
