@@ -53,7 +53,7 @@ const TransactionTable = ({ transactions, onEdit, onDelete }) => {
                       : 'text-rose-600'
                   }
                 >
-                  {tx.type === 'income' ? '+' : '-'}${tx.amount.toFixed(2)}
+                  {tx.type === 'income' ? '+' : '-'}Rs. {tx.amount.toFixed(2)}
                 </span>
               </td>
               <td className="px-4 py-2 align-middle text-right text-xs">

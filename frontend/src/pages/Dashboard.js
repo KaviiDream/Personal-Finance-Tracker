@@ -4,11 +4,14 @@ import MonthFilter from '../components/MonthFilter';
 import TransactionTable from '../components/TransactionTable';
 import { MonthlyOverview } from '../components/MonthlyOverview';
 import MonthlyCharts from '../components/MonthlyCharts';
+import CategoryBudgets from '../components/CategoryBudgets';
+import SpendingHeatmap from '../components/SpendingHeatmap';
+import CategoryPieChart from '../components/CategoryPieChart';
 import { useFinance } from '../context/FinanceContext';
 
 const Dashboard = () => {
   const now = new Date();
-  const { transactions } = useFinance();
+  const { transactions, categories } = useFinance();
   const [month, setMonth] = useState(now.getMonth() + 1);
   const [year, setYear] = useState(now.getFullYear());
   const [error, setError] = useState('');
@@ -69,7 +72,17 @@ const Dashboard = () => {
       <>
         <SummaryCards summary={summary} />
         <MonthlyCharts year={year} transactions={yearTransactions} />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <CategoryPieChart month={month} year={year} transactions={transactions} />
+          <CategoryBudgets
+            month={month}
+            year={year}
+            categories={categories}
+            transactions={transactions}
+          />
+        </div>
         <MonthlyOverview year={year} transactions={yearTransactions} />
+        <SpendingHeatmap month={month} year={year} transactions={transactions} />
         <h3 className="text-sm font-semibold text-slate-700 mb-2 mt-4">
           Recent Transactions
         </h3>

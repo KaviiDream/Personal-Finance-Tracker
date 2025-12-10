@@ -16,6 +16,10 @@ const categorySchema = new mongoose.Schema({
     type: String,
     default: '💰'
   },
+  monthlyBudget: {
+    type: Number,
+    default: 0
+  },
   isDefault: {
     type: Boolean,
     default: false

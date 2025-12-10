@@ -29,6 +29,9 @@ const Sidebar = () => {
         <NavLink to="/categories" className={linkClass}>
           <span>Categories</span>
         </NavLink>
+        <NavLink to="/goals" className={linkClass}>
+          <span>Goals</span>
+        </NavLink>
       </nav>
     </aside>
   );

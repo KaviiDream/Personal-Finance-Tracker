@@ -81,13 +81,13 @@ export const MonthlyOverview = ({ year, transactions }) => {
               <tr key={row.monthIndex} className="border-b border-slate-100 last:border-none">
                 <td className="px-3 py-2 text-slate-700">{row.name}</td>
                 <td className="px-3 py-2 text-right text-emerald-600 font-medium">
-                  ${row.income.toFixed(2)}
+                  Rs. {row.income.toFixed(2)}
                 </td>
                 <td className="px-3 py-2 text-right text-rose-600 font-medium">
-                  ${row.expense.toFixed(2)}
+                  Rs. {row.expense.toFixed(2)}
                 </td>
                 <td className="px-3 py-2 text-right font-semibold text-slate-800">
-                  ${row.balance.toFixed(2)}
+                  Rs. {row.balance.toFixed(2)}
                 </td>
                 <td className="px-3 py-2 hidden md:table-cell">
                   <div className="flex items-center gap-1 h-4">

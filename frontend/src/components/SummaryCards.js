@@ -40,7 +40,7 @@ const SummaryCards = ({ summary }) => {
             </span>
           </div>
           <p className={`text-2xl font-semibold ${card.color}`}>
-            ${card.value.toFixed(2)}
+            Rs. {card.value.toFixed(2)}
           </p>
         </div>
       ))}

@@ -7,6 +7,7 @@ const CategoriesPage = () => {
     name: '',
     type: 'expense',
     icon: '💰',
+    monthlyBudget: '',
   });
   const [error, setError] = useState('');
 
@@ -19,8 +20,8 @@ const CategoriesPage = () => {
     e.preventDefault();
     try {
       setError('');
-      addCategory(form);
-      setForm({ name: '', type: 'expense', icon: '💰' });
+      await addCategory(form);
+      setForm({ name: '', type: 'expense', icon: '💰', monthlyBudget: '' });
     } catch (err) {
       setError('Failed to create category');
     }
@@ -80,6 +81,21 @@ const CategoriesPage = () => {
 
         <div>
           <label className="block text-xs font-medium text-slate-600 mb-1">
+            Monthly budget (Rs., optional)
+          </label>
+          <input
+            type="number"
+            name="monthlyBudget"
+            value={form.monthlyBudget}
+            onChange={handleChange}
+            className="w-48 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+            min="0"
+            step="0.01"
+          />
+        </div>
+
+        <div>
+          <label className="block text-xs font-medium text-slate-600 mb-1">
             Icon (emoji or short text)
           </label>
           <input
@@ -111,7 +127,14 @@ const CategoriesPage = () => {
               <span className="text-xl">{cat.icon}</span>
               <div>
                 <p className="text-sm font-medium text-slate-900">{cat.name}</p>
-                <p className="text-xs text-slate-500 capitalize">{cat.type}</p>
+                <p className="text-xs text-slate-500 capitalize">
+                  {cat.type}
+                  {cat.monthlyBudget > 0 && (
+                    <span className="ml-2 text-[11px] text-slate-400">
+                      Budget: Rs. {cat.monthlyBudget.toFixed(0)}/month
+                    </span>
+                  )}
+                </p>
               </div>
             </div>
             {cat.isDefault && (

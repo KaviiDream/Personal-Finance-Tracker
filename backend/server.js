@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const transactionRoutes = require('./routes/transaction');
 const categoryRoutes = require('./routes/category');
+const goalRoutes = require('./routes/goal');
 
 // Load environment variables first
 dotenv.config();
@@ -32,6 +33,7 @@ mongoose.connect(URL)
 // Routes
 app.use('/api/transactions', transactionRoutes);
 app.use('/api/categories', categoryRoutes);
+app.use('/api/goals', goalRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

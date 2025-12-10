@@ -21,10 +21,11 @@ const TransactionsPage = () => {
     setError('');
     try {
       if (editing) {
-        updateTransaction(editing.id, data);
+        const id = editing.id || editing._id;
+        await updateTransaction(id, data);
         setEditing(null);
       } else {
-        addTransaction(data);
+        await addTransaction(data);
       }
     } catch (err) {
       setError('Failed to save transaction');
@@ -37,7 +38,7 @@ const TransactionsPage = () => {
 
   const handleDelete = async (id) => {
     try {
-      deleteTransaction(id);
+      await deleteTransaction(id);
     } catch (err) {
       setError('Failed to delete transaction');
     }
